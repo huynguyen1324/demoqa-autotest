@@ -1,0 +1,30 @@
+name: Selenium Java CI
+
+# Khi nào thì chạy test?
+on:
+  push:
+    branches: [ "main" ] # Chạy khi bạn push code mới
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * *' # (Tùy chọn) Tự động chạy vào 12h đêm hàng ngày
+  workflow_dispatch: # Cho phép bạn bấm nút "Run" thủ công trên web GitHub
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Mượn máy ảo Linux của GitHub
+
+    steps:
+      - name: Lấy code về (Checkout)
+        uses: actions/checkout@v3
+
+      - name: Cài đặt JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Chạy Test bằng Maven
+        # GitHub Actions đã cài sẵn Chrome, ta chỉ việc chạy lệnh
+        run: mvn clean test

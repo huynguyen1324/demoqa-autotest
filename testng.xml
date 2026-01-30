@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="DemoQA Automation Suite">
+    <test name="All Tests">
+        <classes>
+            <class name="tests.alerts.AlertsTest"/>
+        </classes>
+    </test>
+</suite>
